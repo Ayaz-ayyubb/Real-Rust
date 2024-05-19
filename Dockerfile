@@ -2,7 +2,7 @@
 FROM rust:latest as builder
 
 # Set the working directory
-WORKDIR /app
+WORKDIR /Real-Rust
 
 # Copy the Cargo.toml and Cargo.lock files to cache dependencies
 COPY Cargo.toml ./
@@ -27,7 +27,7 @@ RUN cargo build --release
 FROM debian:buster-slim
 
 # Set the working directory
-WORKDIR /app
+WORKDIR /Real-Rust
 
 # Copy the built binary from the previous stage
 COPY --from=builder /app/target/release/main.rs .
