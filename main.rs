@@ -1,7 +1,6 @@
 use teloxide::prelude::*;
 use teloxide::utils::command::BotCommand;
 use teloxide::types::{InlineKeyboardMarkup, InlineKeyboardButton};
-use serde_json::json;
 use teloxide::types::{ParseMode, UpdateKind};
 
 async fn airing(cx: UpdateWithCx<Message>) -> ResponseResult<Message> {
