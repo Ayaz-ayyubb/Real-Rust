@@ -58,7 +58,41 @@ async fn airing(cx: UpdateWithCx<Message>) -> ResponseResult<Message> {
     cx.answer("Invalid command").await
 }
 
-// Function to format time (t) can be implemented here.
+// Function to format time (t) added here.
+fn t(milliseconds: i64) -> String {
+    let mut milliseconds = milliseconds;
+    let seconds = milliseconds / 1000;
+    milliseconds %= 1000;
+    let minutes = seconds / 60;
+    let mut seconds = seconds % 60;
+    let hours = minutes / 60;
+    let mut minutes = minutes % 60;
+    let days = hours / 24;
+    let mut hours = hours % 24;
+
+    let mut tmp = String::new();
+
+    if days > 0 {
+        tmp += &format!("{} Days, ", days);
+    }
+    if hours > 0 {
+        tmp += &format!("{} Hours, ", hours);
+    }
+    if minutes > 0 {
+        tmp += &format!("{} Minutes, ", minutes);
+    }
+    if seconds > 0 {
+        tmp += &format!("{} Seconds, ", seconds);
+    }
+    if milliseconds > 0 {
+        tmp += &format!("{} ms, ", milliseconds);
+    }
+
+    tmp.pop(); // remove trailing comma
+    tmp.pop(); // remove trailing space
+
+    tmp
+}
 
 // Assuming these constants are defined somewhere in your code.
 const url: &str = "https://graphql.anilist.co";
