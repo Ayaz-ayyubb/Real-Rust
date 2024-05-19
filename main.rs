@@ -94,7 +94,7 @@ fn t(milliseconds: i64) -> String {
     tmp
 }
 
-// Assuming these constants are defined somewhere in your code.
+// No need to assume, I have already added these.
 const url: &str = "https://graphql.anilist.co";
 const airing_query: &str = "
     query ($id: Int, $search: String) { 
