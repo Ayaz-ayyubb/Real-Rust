@@ -8,12 +8,11 @@ WORKDIR /Real-Rust
 COPY Cargo.toml ./
 
 # Create an empty src directory to trick cargo into believing it's a Rust project
+RUN mkdir src && \
+    echo "fn main() { println!(\"dummy\") }" > src/main.rs
 
 # Build the dependencies
 RUN cargo build --release
-
-# Remove the dummy source code
-RUN rm -rf src
 
 # Copy the source code into the container
 COPY . .
@@ -28,7 +27,7 @@ FROM debian:buster-slim
 WORKDIR /Real-Rust
 
 # Copy the built binary from the previous stage
-COPY --from=builder /app/target/release/main.rs .
+COPY --from=builder /Real-Rust/target/release/main .
 
 # Update the package index and install necessary dependencies
 RUN apt-get update && \
@@ -38,4 +37,4 @@ RUN apt-get update && \
 EXPOSE 8080
 
 # Command to run the application
-CMD ["./main.rs"]
+CMD ["./main"]
