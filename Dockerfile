@@ -5,7 +5,7 @@ FROM rust:latest as builder
 WORKDIR /app
 
 # Copy the Cargo.toml and Cargo.lock files to cache dependencies
-COPY Cargo.toml Cargo.lock ./
+COPY Cargo.toml ./
 
 # Create an empty src directory to trick cargo into believing it's a Rust project
 RUN mkdir src && \
