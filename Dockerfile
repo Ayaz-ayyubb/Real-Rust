@@ -8,8 +8,6 @@ WORKDIR /Real-Rust
 COPY Cargo.toml ./
 
 # Create an empty src directory to trick cargo into believing it's a Rust project
-RUN mkdir src && \
-    echo "fn main() { println!(\"dummy\") }" > src/main.rs
 
 # Build the dependencies
 RUN cargo build --release
