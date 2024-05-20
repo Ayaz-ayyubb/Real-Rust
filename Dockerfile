@@ -1,5 +1,5 @@
 # Use a Rust base image
-FROM rust:latest as builder
+FROM rustlang/rust:nightly
 
 # Set the working directory
 WORKDIR /Real-Rust
