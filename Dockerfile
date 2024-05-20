@@ -1,5 +1,5 @@
 # Use the official Rust nightly image as the base
-FROM rustlang/rust:nightly AS builder
+FROM rustlang/rust:nightly
 
 # Set up the working directory
 WORKDIR /Real-Rust
