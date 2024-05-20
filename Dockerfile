@@ -8,7 +8,7 @@ WORKDIR /Real-Rust
 COPY Cargo.toml ./
 
 RUN mkdir src && \
-    echo "fn main() { println!(\"dummy\") }" > src/real-rust
+    echo "fn main() { println!(\"dummy\") }" > src/main.rs
 
 # Build the dependencies
 RUN cargo build --release
@@ -26,10 +26,10 @@ FROM debian:buster-slim
 WORKDIR /Real-Rust
 
 # Copy the built binary from the previous stage
-COPY --from=builder /usr/src/real-rust/target/release/real-rust .
+COPY --from=builder /usr/src/Real-Rust/target/release/main.rs .
 
 # Expose any ports the app needs
 EXPOSE 8080
 
 # Command to run the application
-CMD ["./real-rust"]
+CMD ["./main"]
