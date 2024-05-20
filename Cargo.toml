@@ -1,5 +1,5 @@
 [package]
-name = "Anifluid rust"
+name = "Anifluid-rust"
 version = "0.1.0"
 authors = ["Ayaz-ayyubb"]
 edition = "2024"
