@@ -4,9 +4,6 @@ FROM rustlang/rust:nightly AS builder
 # Set up the working directory
 WORKDIR /usr/src/real-rust
 
-# Copy the Cargo.toml and Cargo.lock files to optimize caching
-COPY Cargo.toml ./
-
 # Build the dependencies
 RUN cargo build --release
 
