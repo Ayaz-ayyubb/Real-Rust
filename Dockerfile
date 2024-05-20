@@ -29,4 +29,4 @@ WORKDIR /Real-Rust
 EXPOSE 8080
 
 # Command to run the application
-CMD ["cargo", "run", "--release"]
+CMD ["./main.rs"]
