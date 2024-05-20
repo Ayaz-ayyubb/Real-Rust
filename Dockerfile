@@ -7,10 +7,6 @@ WORKDIR /Real-rust
 # Copy the Cargo.toml and Cargo.lock files to optimize caching
 COPY Cargo.toml ./
 
-
-RUN mkdir src && \
-    echo "fn main() { println!(\"dummy\") }" > src/real-rust
-
 # Build the dependencies
 RUN cargo build --release
 
