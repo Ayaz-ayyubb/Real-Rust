@@ -2,10 +2,13 @@
 FROM rustlang/rust:nightly AS builder
 
 # Set up the working directory
-WORKDIR /Real-rust
+WORKDIR /Real-Rust
 
 # Copy the Cargo.toml and Cargo.lock files to optimize caching
 COPY Cargo.toml ./
+
+RUN mkdir src && \
+    echo "fn main() { println!(\"dummy\") }" > src/real-rust
 
 # Build the dependencies
 RUN cargo build --release
@@ -20,7 +23,7 @@ RUN cargo build --release
 FROM debian:buster-slim
 
 # Set up the working directory
-WORKDIR /Real-rust
+WORKDIR /Real-Rust
 
 # Copy the built binary from the previous stage
 COPY --from=builder /usr/src/real-rust/target/release/real-rust .
