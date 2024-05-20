@@ -1,40 +1,32 @@
-# Use a Rust base image
-FROM rustlang/rust:nightly
+# Use the official Rust nightly image as the base
+FROM rustlang/rust:nightly AS builder
 
-# Set the working directory
-WORKDIR /Real-Rust
+# Set up the working directory
+WORKDIR /usr/src/real-rust
 
-# Copy the Cargo.toml and Cargo.lock files to cache dependencies
-COPY Cargo.toml ./
-
-# Create an empty src directory to trick cargo into believing it's a Rust project
-RUN mkdir src && \
-    echo "fn main() { println!(\"dummy\") }" > src/main.rs
+# Copy the Cargo.toml and Cargo.lock files to optimize caching
+COPY Cargo.toml Cargo.lock ./
 
 # Build the dependencies
 RUN cargo build --release
 
-# Copy the source code into the container
+# Copy the rest of the application code
 COPY . .
 
-# Build the Rust application
+# Build the application
 RUN cargo build --release
 
-# Start a new stage to keep the final image lightweight
+# Use a smaller base image for the final container
 FROM debian:buster-slim
 
-# Set the working directory
-WORKDIR /Real-Rust
+# Set up the working directory
+WORKDIR /usr/src/real-rust
 
 # Copy the built binary from the previous stage
-COPY --from=builder /Real-Rust/target/release/main .
+COPY --from=builder /usr/src/real-rust/target/release/real-rust .
 
-# Update the package index and install necessary dependencies
-RUN apt-get update && \
-    apt-get install -y git
-
-# Expose any ports your application may use
+# Expose any ports the app needs
 EXPOSE 8080
 
 # Command to run the application
-CMD ["./main"]
+CMD ["./real-rust"]
