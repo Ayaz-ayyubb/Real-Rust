@@ -25,9 +25,6 @@ FROM debian:buster-slim
 # Set up the working directory
 WORKDIR /Real-Rust
 
-# Copy the built binary from the previous stage
-COPY --from=builder /usr/src/Real-Rust/target/release/main.rs .
-
 # Expose any ports the app needs
 EXPOSE 8080
 
