@@ -1,2 +1,8 @@
+[package]
+name = "Anifluid rust"
+version = "0.1.0"
+authors = ["Ayaz-ayyubb"]
+edition = "2024"
+
 [dependencies]
 teloxide = "0.3"
